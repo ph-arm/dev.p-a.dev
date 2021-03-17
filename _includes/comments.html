@@ -1,6 +1,13 @@
 {% if page.comments != false %}
   <section class="comments">
     <h2>Comments</h2>
-    {% include disqus.html %}
+    <script src="https://utteranc.es/client.js"
+        repo="https://github.com/ph-arm/dev.p-a.dev"
+        issue-term="title"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
   </section>
 {% endif %}
