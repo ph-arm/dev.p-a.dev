@@ -2,6 +2,7 @@
 title: "Clean and simple pattern matching in python"
 layout: post
 excerpt: "clean pattern matching"
+category : code
 tags:
   - Code
 ---

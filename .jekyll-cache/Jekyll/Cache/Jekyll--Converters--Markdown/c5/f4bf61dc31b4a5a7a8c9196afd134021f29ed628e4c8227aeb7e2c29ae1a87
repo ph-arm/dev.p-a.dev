@@ -1,6 +1,0 @@
-I"–<p>Forgot way too often how to tamper with sqlmap. The goal here is to simply pass a second parameter h that is a hash to verify the payload is indeed sent by a friendly agent knowing the key, or knowing the hash corresponding to the page.</p>
-
-<noscript><pre>400: Invalid request</pre></noscript>
-<script src="https://gist.github.com/13e04a648720801cea71dd8f45276b3d.js?file=proper_tamper.py"> </script>
-
-:ET
