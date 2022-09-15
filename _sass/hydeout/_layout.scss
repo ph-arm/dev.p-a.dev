@@ -161,15 +161,16 @@ body {
 
   #sidebar {
     position: fixed;
-
+    overflow: hidden;
+    
     // Attach to bottom or top of window
-    @if $sidebar-sticky {
-      bottom: 0;
-    }
+    //@if $sidebar-sticky {
+    //  bottom: 0;
+    //}
 
-    @else {
-      top: 0;
-    }
+    //@else {
+    //  top: 0;
+    //}
 
     // Attach to right or left of window
     @if $layout-reverse {
@@ -202,6 +203,7 @@ body {
     background: $body-bg;
     color: $body-color;
     min-height: 100vh;
+    min-width: 100 rem;
     padding:
       $section-spacing * 2
       $section-spacing * 2
@@ -231,6 +233,7 @@ body {
 
     > * {
       max-width: 60 rem;
+      
       padding: 0;
     }
   }
@@ -242,21 +245,44 @@ body {
 
 #sidebar a {
   color: $sidebar-link-color;
+  position: relative;
+  display: block;
+  padding: 4px 0;
+  font-family: Lato, sans-serif;
+  //color: #ecf0f1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
 
   svg {
     fill: $sidebar-icon-color;
   }
 }
-
+#sidebar a:after{
+    position: absolute;
+    content: "";
+    top: 100%;
+    left: 0;
+    width: 65%;
+    height: 3px;
+    background: #3498db;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.9s;
+}
 #sidebar a:hover,
 #sidebar a:focus,
-#sidebar a.active {
-  svg { fill: $sidebar-icon-color; }
-}
+//#sidebar a.active {
+//  svg { fill: $sidebar-icon-color; }
+//}
 
 #sidebar a:hover,
+#sidebar a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 #sidebar a:focus {
-  text-decoration: underline;
+  //text-decoration: underline;
 
   &.icon {
     text-decoration: none;

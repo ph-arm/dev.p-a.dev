@@ -51,3 +51,6 @@ _config.dev.yml
 #backup
 *.backup/
 *.back
+
+#jekyll sepcific.
+.jekyll-cache
