@@ -261,7 +261,7 @@ body {
 #sidebar a:after{
     position: absolute;
     content: "";
-    top: 100%;
+    top: 85%;
     left: 0;
     width: 65%;
     height: 3px;
@@ -291,6 +291,27 @@ body {
 
 #sidebar a.active {
   font-weight: bold;
+}
+
+#sidebar a.active:before {
+  font-weight: bold;
+  position: absolute;
+  content: "";
+  top: 85%;
+  left: 0;
+  width: 65%;
+  height: 3px;
+  background: #3498db;
+}
+#sidebar a.active:after {
+  font-weight: bold;
+  position: absolute;
+  content: "";
+  top: 85%;
+  left: 0;
+  width: 65%;
+  height: 3px;
+  background: #3498db;
 }
 
 #sidebar .site-title {
