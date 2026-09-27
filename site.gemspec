@@ -19,11 +19,13 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
 
-  spec.add_runtime_dependency "jekyll", ">= 3.6", "< 5.0"
-  spec.add_runtime_dependency "jekyll-gist", "~> 1.4"
-  spec.add_runtime_dependency "jekyll-paginate", "~> 1.1"
-  spec.add_runtime_dependency "jekyll-feed", "~> 0.6"
-  spec.add_development_dependency "bundler", "~> 2.1", ">= 2.1.4"
+  spec.add_runtime_dependency "jekyll", "~> 4.4"
+  spec.add_runtime_dependency "jekyll-feed", "~> 0.17"
+  spec.add_runtime_dependency "jekyll-gist", "~> 1.5"
+  spec.add_runtime_dependency "jekyll-paginate-v2", "~> 3.0"
+  spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.8"
+  spec.add_runtime_dependency "jekyll-sitemap", "~> 1.4"
+  spec.add_development_dependency "bundler", ">= 2.3"
   spec.add_development_dependency "wdm", "~> 0.1" if Gem.win_platform?
 end
 

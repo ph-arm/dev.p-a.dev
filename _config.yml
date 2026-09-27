@@ -18,14 +18,18 @@ author:
   name:           'P.A.'
   url:            https://github.com/ph-arm
 
-paginate:         5
-# paginate_path:    '/page:num'
-                    # Or '/blog/page:num' if you want to move your index pages
+pagination:
+  enabled:        true
+  per_page:       5
+  permalink:      '/page:num/'
+  sort_reverse:   true
 
 plugins:
   - jekyll-feed
   - jekyll-gist
-  - jekyll-paginate
+  - jekyll-paginate-v2
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 # Sidebar link settings
 sidebar_home_link:  true

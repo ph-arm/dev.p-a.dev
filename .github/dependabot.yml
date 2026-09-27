@@ -1,0 +1,33 @@
+version: 2
+updates:
+  # Ruby gems (Gemfile + site.gemspec)
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      jekyll:
+        patterns:
+          - "jekyll"
+          - "jekyll-*"
+
+  # GitHub Actions used in the deploy workflow
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "*"
+
+  # Node dev tooling (stylelint)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      stylelint:
+        patterns:
+          - "stylelint*"

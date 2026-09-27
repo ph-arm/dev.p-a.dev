@@ -1,7 +1,6 @@
-# Ignore docs files
+# Ignore build output
 _gh_pages
 _site
-.ruby-version
 
 # Numerous always-ignore extensions
 *.diff
@@ -43,7 +42,6 @@ node_modules
 
 # Dev stuff
 Makefile
-Gemfile.lock
 _config.dev.yml
 .vscode
 *.gem
