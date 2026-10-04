@@ -316,7 +316,15 @@ body {
 
 #sidebar .site-title {
   color: $sidebar-title-color;
-  a { color: inherit; }
+  // Title is a real <a> now, so it inherits the `#sidebar a` styling (Lato,
+  // uppercase, hover underline). Undo that so it looks like the plain title.
+  a {
+    color: inherit;
+    font-family: inherit;
+    text-transform: none;
+
+    &::after { content: none; }
+  }
 }
 
 #sidebar nav {
