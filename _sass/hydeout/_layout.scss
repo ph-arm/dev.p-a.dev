@@ -317,11 +317,14 @@ body {
 #sidebar .site-title {
   color: $sidebar-title-color;
   // Title is a real <a> now, so it inherits the `#sidebar a` styling (Lato,
-  // uppercase, hover underline). Undo that so it looks like the plain title.
+  // uppercase, block + 4px padding, hover underline). Undo all of that so it
+  // renders as the plain inline title it was before the migration.
   a {
     color: inherit;
     font-family: inherit;
     text-transform: none;
+    display: inline;
+    padding: 0;
 
     &::after { content: none; }
   }
