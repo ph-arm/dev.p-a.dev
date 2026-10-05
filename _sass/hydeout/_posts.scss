@@ -87,3 +87,38 @@ article + *,
     margin-top: 0.25rem;
   }
 }
+
+// Weekly column heading (e.g. "Week 0") and the single-post title share this editorial style
+.week-heading,
+h1.post-title {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  color: $sidebar-bg-color;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, $sidebar-bg-color, $cyan);
+    border-radius: 300px;
+  }
+}
+
+.week-heading {
+  margin-top: 2.5rem;
+  font-size: 1.4rem;
+}
+
+// Lead image at the top of a post: reworked photo shown as-is, near-full width with a small side inset
+.post-hero {
+  width: calc(100% - 1rem);
+  margin: 0 auto 1.5rem;
+}

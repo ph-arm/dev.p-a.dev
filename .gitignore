@@ -40,6 +40,9 @@ validation-report.json
 node_modules
 .sass-cache
 
+# Source images to process locally (originals kept, never committed)
+source-images/
+
 # Dev stuff
 Makefile
 _config.dev.yml

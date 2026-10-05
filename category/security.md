@@ -2,6 +2,7 @@
 layout: category
 title: Security
 category: security
+sidebar_sort_order: 3
 ---
 
 You will find here everything related to CVE, security designs and WTF. Everything related directly to CTF, hack the box, root-me and so on will be in the CTF category.  

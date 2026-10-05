@@ -1,0 +1,6 @@
+# Posts use kramdown attribute lists ({: .class }) that must sit on the line
+# directly after their block — Prettier's blank lines around headings break them.
+_posts/
+
+# Hand-formatted prose (intentional line wrapping / breaks)
+about.md
