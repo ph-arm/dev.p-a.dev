@@ -1,1 +1,74 @@
 <!-- Optional footer content -->
+
+{% comment %} Home / paginated pages: infinite scroll that appends the next page's articles. {% endcomment %}
+<style>
+  .infinite-loader { min-height: 1.5rem; }
+  .infinite-loader.is-loading::after {
+    content: "";
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 1.5rem auto;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-top-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    animation: infinite-spin 0.7s linear infinite;
+  }
+  @keyframes infinite-spin { to { transform: rotate(360deg); } }
+</style>
+<script>
+  (function () {
+    var list = document.getElementById('post-list');
+    if (!list) return;
+    var firstOlder = document.querySelector('.pagination-item.older');
+    // No next page, or no observer support: keep the manual pager as a fallback.
+    if (!firstOlder || !('IntersectionObserver' in window)) return;
+    var nextUrl = firstOlder.getAttribute('href');
+
+    var pager = firstOlder.closest('.pagination');
+    if (pager) pager.style.display = 'none';
+
+    var loader = document.createElement('div');
+    loader.className = 'infinite-loader';
+    list.parentNode.insertBefore(loader, pager);
+
+    var loading = false, done = false;
+
+    function load() {
+      if (loading || done || !nextUrl) return;
+      loading = true;
+      loader.classList.add('is-loading');
+      fetch(nextUrl, { credentials: 'same-origin' })
+        .then(function (r) { return r.text(); })
+        .then(function (html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var items = doc.querySelectorAll('#post-list > article');
+          for (var i = 0; i < items.length; i++) {
+            list.appendChild(document.importNode(items[i], true));
+          }
+          var older = doc.querySelector('.pagination-item.older');
+          nextUrl = older ? older.getAttribute('href') : null;
+          loading = false;
+          loader.classList.remove('is-loading');
+          if (!nextUrl) {
+            done = true;
+            observer.disconnect();
+            loader.remove();
+          } else if (loader.getBoundingClientRect().top < window.innerHeight + 600) {
+            load();
+          }
+        })
+        .catch(function () {
+          loading = false;
+          loader.classList.remove('is-loading');
+        });
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) { load(); break; }
+      }
+    }, { rootMargin: '600px 0px' });
+    observer.observe(loader);
+  })();
+</script>

@@ -88,9 +88,11 @@ article + *,
   }
 }
 
-// Weekly column heading (e.g. "Week 0") and the single-post title share this editorial style
+// Weekly column heading (e.g. "Week 0"), the single-post `<h1>` title, and the
+// post-list `<h2>` title link all share this editorial style so they look identical.
 .week-heading,
-h1.post-title {
+h1.post-title,
+h2.post-title {
   position: relative;
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -121,4 +123,178 @@ h1.post-title {
 .post-hero {
   width: calc(100% - 1rem);
   margin: 0 auto 1.5rem;
+}
+
+// In-article headings + spacing
+// Clearer hierarchy for `##` / `###` and more breathing room between blocks.
+.post-body {
+  // Roomier, more legible body copy
+  p,
+  ul,
+  ol {
+    line-height: 1.7;
+  }
+
+  p {
+    margin-bottom: 1.2rem;
+  }
+
+  ul,
+  ol {
+    margin-bottom: 1.25rem;
+  }
+
+  // Section heading (##): brand-coloured with a full-width hairline divider
+  h2:not(.post-title):not(.week-heading) {
+    margin-top: 3.25rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid $border-color;
+    color: $sidebar-bg-color;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    scroll-margin-top: 1.5rem;
+  }
+
+  // Sub-section heading (###): gradient accent bar on the left
+  h3 {
+    position: relative;
+    margin-top: 2.5rem;
+    margin-bottom: 0.85rem;
+    padding-left: 0.9rem;
+    color: $heading-color;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.35;
+    scroll-margin-top: 1.5rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.2em;
+      bottom: 0.2em;
+      left: 0;
+      width: 4px;
+      border-radius: 300px;
+      background: linear-gradient(180deg, $sidebar-bg-color, $cyan);
+    }
+  }
+
+  // Keep the first heading of the article from drifting too far from the intro
+  > h2:first-child,
+  > h3:first-child {
+    margin-top: 1rem;
+  }
+}
+
+// Closing "trust" meme: float beside the wrap-around text; stack + centre on narrow screens
+.trust-meme {
+  float: right;
+  width: 44%;
+  max-width: 340px;
+  margin: 0.25rem 0 1rem 1.5rem;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    color: $body-muted;
+    text-align: center;
+  }
+
+  @media (max-width: 38rem) {
+    float: none;
+    width: 100%;
+    max-width: 360px;
+    margin: 1.5rem auto;
+  }
+}
+
+// Category listing: each post is a horizontal bar — title + excerpt on the left, thumbnail on the right
+.post-cards {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.post-card {
+  margin: 0;
+}
+
+.post-card__link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  background: $body-bg;
+  color: $body-color;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    border-color: $cyan;
+    box-shadow: 0 6px 18px rgba(40, 109, 187, 0.12);
+    transform: translateY(-1px);
+  }
+}
+
+.post-card__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.post-card__title {
+  margin: 0 0 0.3rem;
+  color: $heading-color;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.post-card__meta {
+  margin: 0 0 0.4rem;
+  color: $body-muted;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.post-card__excerpt {
+  margin: 0;
+  color: $body-muted;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.post-card__media {
+  flex: 0 0 auto;
+  width: 84px;
+  height: 84px;
+  overflow: hidden;
+  border-radius: 10px;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 22rem) {
+  .post-card__media {
+    width: 64px;
+    height: 64px;
+  }
 }

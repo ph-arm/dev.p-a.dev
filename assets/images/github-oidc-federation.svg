@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 860" width="1300" height="860" role="img" aria-labelledby="ttl desc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="ttl">GitHub Actions OIDC to GitHub App token exchange</title>
+  <desc id="desc">A GitHub Actions workflow requests a short-lived OIDC JWT from GitHub, sends it to a federation broker that is the only holder of the central GitHub App private key. The broker verifies the token signature against GitHub's JWKS and matches it to the organization's .github-oidc policy, then mints a scoped, short-lived GitHub App installation token that the workflow uses to call the GitHub REST API. No static secret is stored in the repository, Action, or runner.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#eef1f5"/>
+    </linearGradient>
+    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eaf4ff"/><stop offset="1" stop-color="#d7ecff"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff9e6"/><stop offset="1" stop-color="#fff0bf"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8fbee"/><stop offset="1" stop-color="#d0f5db"/>
+    </linearGradient>
+    <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6efff"/><stop offset="1" stop-color="#eadcff"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1f2328" flood-opacity="0.16"/>
+    </filter>
+    <filter id="shb" x="-60%" y="-60%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#1f2328" flood-opacity="0.28"/>
+    </filter>
+    <marker id="hd" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#30363d"/>
+    </marker>
+    <marker id="hdR" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#6e7781"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas -->
+  <rect x="0" y="0" width="1300" height="860" fill="url(#bg)"/>
+  <rect x="10" y="10" width="1280" height="840" rx="16" fill="none" stroke="#d0d7de" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="650" y="52" text-anchor="middle" font-size="24" font-weight="800" fill="#1f2328">GitHub Actions OIDC &#8594; GitHub App token exchange</text>
+  <text x="650" y="78" text-anchor="middle" font-size="14.5" fill="#57606a">Keyless intra-GitHub auth &#8212; the App private key never leaves the broker</text>
+
+  <!-- Legend -->
+  <g filter="url(#sh)">
+    <rect x="1016" y="28" width="234" height="58" rx="10" fill="#ffffff" stroke="#d0d7de" stroke-width="1"/>
+  </g>
+  <line x1="1034" y1="48" x2="1072" y2="48" stroke="#30363d" stroke-width="2.5" stroke-linecap="round" marker-end="url(#hd)"/>
+  <text x="1082" y="52" font-size="12.5" fill="#424a53">request</text>
+  <line x1="1034" y1="68" x2="1072" y2="68" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 5" marker-end="url(#hdR)"/>
+  <text x="1082" y="72" font-size="12.5" fill="#424a53">response</text>
+
+  <!-- Lifelines -->
+  <g stroke="#c9d1d9" stroke-width="1.5" stroke-dasharray="3 6">
+    <line x1="200" y1="184" x2="200" y2="742"/>
+    <line x1="500" y1="184" x2="500" y2="742"/>
+    <line x1="800" y1="184" x2="800" y2="742"/>
+    <line x1="1100" y1="184" x2="1100" y2="742"/>
+  </g>
+
+  <!-- Activation bars -->
+  <g>
+    <rect x="194" y="236" width="12" height="458" rx="6" fill="#cfe8ff" stroke="#0969da" stroke-width="1"/>
+    <rect x="494" y="236" width="12" height="70" rx="6" fill="#ffe8a8" stroke="#bf8700" stroke-width="1"/>
+    <rect x="794" y="362" width="12" height="248" rx="6" fill="#c3f3d0" stroke="#1a7f37" stroke-width="1"/>
+    <rect x="1094" y="478" width="12" height="70" rx="6" fill="#e6d6ff" stroke="#8250df" stroke-width="1"/>
+    <rect x="1094" y="654" width="12" height="44" rx="6" fill="#e6d6ff" stroke="#8250df" stroke-width="1"/>
+  </g>
+
+  <!-- Headers -->
+  <g text-anchor="middle">
+    <!-- L1 : workflow -->
+    <g filter="url(#sh)"><rect x="85" y="92" width="230" height="92" rx="14" fill="url(#g1)" stroke="#0969da" stroke-width="2"/></g>
+    <circle cx="200" cy="126" r="21" fill="#0969da"/>
+    <path d="M192,116 L210,126 L192,136 Z" fill="#ffffff"/>
+    <text x="200" y="163" font-size="15.5" font-weight="700" fill="#1f2328">GitHub Actions</text>
+    <text x="200" y="180" font-size="12.5" fill="#57606a">workflow runner</text>
+
+    <!-- L2 : OIDC provider -->
+    <g filter="url(#sh)"><rect x="385" y="92" width="230" height="92" rx="14" fill="url(#g2)" stroke="#bf8700" stroke-width="2"/></g>
+    <circle cx="500" cy="126" r="21" fill="#bf8700"/>
+    <rect x="490" y="119" width="20" height="14" rx="2.5" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="496" cy="126" r="2.6" fill="#ffffff"/>
+    <line x1="501" y1="123" x2="507" y2="123" stroke="#ffffff" stroke-width="2"/>
+    <line x1="501" y1="129" x2="507" y2="129" stroke="#ffffff" stroke-width="2"/>
+    <text x="500" y="163" font-size="15.5" font-weight="700" fill="#1f2328">GitHub OIDC</text>
+    <text x="500" y="180" font-size="12.5" fill="#57606a">identity provider</text>
+
+    <!-- L3 : broker (emphasised) -->
+    <g filter="url(#sh)"><rect x="685" y="90" width="230" height="96" rx="14" fill="url(#g3)" stroke="#1a7f37" stroke-width="2.75"/></g>
+    <circle cx="800" cy="126" r="22" fill="#1a7f37"/>
+    <path d="M790,121 H807" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M803,117 L808,121 L803,125" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M810,131 H793" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M797,127 L792,131 L797,135" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <text x="800" y="162" font-size="15.5" font-weight="800" fill="#1f2328">Federation broker</text>
+    <text x="800" y="179" font-size="12.5" font-weight="600" fill="#1a7f37">holds App private key</text>
+
+    <!-- L4 : app + api -->
+    <g filter="url(#sh)"><rect x="985" y="92" width="230" height="92" rx="14" fill="url(#g4)" stroke="#8250df" stroke-width="2"/></g>
+    <circle cx="1100" cy="126" r="21" fill="#8250df"/>
+    <circle cx="1100" cy="126" r="9" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <ellipse cx="1100" cy="126" rx="4" ry="9" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <line x1="1091" y1="126" x2="1109" y2="126" stroke="#ffffff" stroke-width="2"/>
+    <text x="1100" y="163" font-size="15.5" font-weight="700" fill="#1f2328">GitHub App</text>
+    <text x="1100" y="180" font-size="12.5" fill="#57606a">&amp; REST API</text>
+  </g>
+
+  <!-- Messages -->
+  <g>
+    <!-- arrows -->
+    <g fill="none" stroke-linecap="round">
+      <line x1="214" y1="250" x2="488" y2="250" stroke="#30363d" stroke-width="2.5" marker-end="url(#hd)"/>
+      <line x1="486" y1="300" x2="212" y2="300" stroke="#6e7781" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#hdR)"/>
+      <line x1="214" y1="362" x2="788" y2="362" stroke="#30363d" stroke-width="2.5" marker-end="url(#hd)"/>
+      <path d="M800,404 h58 v44 h-58" stroke="#30363d" stroke-width="2.5" marker-end="url(#hd)"/>
+      <line x1="814" y1="492" x2="1088" y2="492" stroke="#30363d" stroke-width="2.5" marker-end="url(#hd)"/>
+      <line x1="1086" y1="542" x2="812" y2="542" stroke="#6e7781" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#hdR)"/>
+      <line x1="786" y1="604" x2="212" y2="604" stroke="#6e7781" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#hdR)"/>
+      <line x1="214" y1="668" x2="1088" y2="668" stroke="#30363d" stroke-width="2.5" marker-end="url(#hd)"/>
+    </g>
+
+    <!-- step badges -->
+    <g filter="url(#shb)">
+      <circle cx="200" cy="250" r="13" fill="#0969da"/>
+      <circle cx="500" cy="300" r="13" fill="#bf8700"/>
+      <circle cx="200" cy="362" r="13" fill="#0969da"/>
+      <circle cx="800" cy="404" r="13" fill="#1a7f37"/>
+      <circle cx="800" cy="492" r="13" fill="#1a7f37"/>
+      <circle cx="1100" cy="542" r="13" fill="#8250df"/>
+      <circle cx="800" cy="604" r="13" fill="#1a7f37"/>
+      <circle cx="200" cy="668" r="13" fill="#0969da"/>
+    </g>
+    <g fill="#ffffff" font-size="14" font-weight="700" text-anchor="middle">
+      <text x="200" y="255">1</text>
+      <text x="500" y="305">2</text>
+      <text x="200" y="367">3</text>
+      <text x="800" y="409">4</text>
+      <text x="800" y="497">5</text>
+      <text x="1100" y="547">6</text>
+      <text x="800" y="609">7</text>
+      <text x="200" y="673">8</text>
+    </g>
+
+    <!-- labels (halo via paint-order for readability over lifelines) -->
+    <g fill="#1f2328" font-size="14" stroke="#f3f5f8" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke">
+      <text x="351" y="236" text-anchor="middle">Request OIDC token &#183; <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#0550ae" stroke="none">id-token: write</tspan></text>
+      <text x="349" y="286" text-anchor="middle">Signed OIDC JWT &#183; iss &#183; aud &#183; sub</text>
+      <text x="501" y="348" text-anchor="middle">POST <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#0550ae" stroke="none">/token-exchange</tspan> { token, org, repos, permissions }</text>
+      <text x="866" y="420" font-size="13">Verify JWT (GitHub JWKS)</text>
+      <text x="866" y="438" font-size="13">+ match <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#0550ae" stroke="none">.github-oidc</tspan> policy</text>
+      <text x="951" y="478" text-anchor="middle">Authenticate as App <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#0550ae" stroke="none">(app_id + key)</tspan></text>
+      <text x="949" y="528" text-anchor="middle">Installation token &#183; scoped, ~1&#160;h</text>
+      <text x="499" y="590" text-anchor="middle">Return short-lived token to the workflow</text>
+      <text x="651" y="654" text-anchor="middle">Call GitHub REST API &#183; intra-GitHub, least-privilege</text>
+    </g>
+  </g>
+
+  <!-- Footer callout -->
+  <g filter="url(#sh)"><rect x="85" y="760" width="1130" height="74" rx="12" fill="#fff8e6" stroke="#e0b949" stroke-width="1.5"/></g>
+  <circle cx="121" cy="797" r="17" fill="#bf8700"/>
+  <rect x="114" y="796" width="14" height="10" rx="1.5" fill="#ffffff"/>
+  <path d="M117,796 v-3.5 a4,4 0 0 1 8,0 v3.5" fill="none" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="121" cy="801" r="1.4" fill="#bf8700"/>
+  <text x="152" y="792" font-size="14" font-weight="700" fill="#4a3a00">The App private key lives only in the broker &#8212; never in a repo, Action or runner.</text>
+  <text x="152" y="814" font-size="13.5" fill="#5c5330">Every job receives a short-lived, least-privilege token; access is declared as code in each org&#8217;s <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#8a6d00">.github-oidc</tspan> repo.</text>
+</svg>

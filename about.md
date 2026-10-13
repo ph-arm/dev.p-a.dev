@@ -14,7 +14,7 @@ I work at the intersection of security and backend/DevOps — these days leading
 for source control and CI/CD pipelines for several millions of jobs. Before that I spent years as a security architect,
 pentester, and DevOps engineer across finance organism, government, and industry — including leading
 the audit team at the French Ministry of Finance.  
-On the side I teached computer sciences and maths, and tinker with several projects of my own.
+On the side I taught computer sciences and maths, and tinkered with several projects of my own.
 
 Mostly Python, Go, and a lot of cloud.  
 Offensive-security and cloud certified (OSCP, OSWE, AWS security and architect).  

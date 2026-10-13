@@ -6,16 +6,24 @@ layout: page
   {{ content }}
 {% endunless %}
 
-<ul class="posts-list">
-  {% assign category = page.category | default: page.title %}
+{% assign category = page.category | default: page.title %}
+<ul class="post-cards">
   {% for post in site.categories[category] %}
-    <li>
-      <h3>
-        <a href="{{ post.url | relative_url }}">
-          {{ post.title }}
-          <small>{{ post.date | date_to_string }}</small>
-        </a>
-      </h3>
+    <li class="post-card">
+      <a class="post-card__link" href="{{ post.url | relative_url }}">
+        <div class="post-card__body">
+          <h3 class="post-card__title">{{ post.title }}</h3>
+          <p class="post-card__meta">{{ post.date | date_to_string }}</p>
+          {% if post.excerpt %}
+            <p class="post-card__excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
+          {% endif %}
+        </div>
+        {% if post.thumbnail %}
+          <div class="post-card__media">
+            <img src="{{ post.thumbnail | relative_url }}" alt="" width="168" height="168" loading="lazy" decoding="async">
+          </div>
+        {% endif %}
+      </a>
     </li>
   {% endfor %}
 </ul>
